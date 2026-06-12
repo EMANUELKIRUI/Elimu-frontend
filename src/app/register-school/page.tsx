@@ -134,7 +134,7 @@ export default function RegisterSchoolPage() {
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-slate-500">After submission, we will create your school workspace and redirect you to login.</p>
-            <Button type="submit">Create School</Button>
+            <Button type="submit">Submit</Button>
           </div>
         </form>
       </div>

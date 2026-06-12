@@ -97,7 +97,7 @@ export function LoginForm() {
           />
 
           <Button type="button" onClick={form.handleSubmit(onSubmit)}>
-            Continue to dashboard
+            Login
           </Button>
         </CardContent>
       </Card>
