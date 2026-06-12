@@ -62,19 +62,20 @@ const testimonials = [
 export default function Home() {
   return (
     <LandingLayout>
-      <section className="relative overflow-hidden bg-white">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:flex lg:items-center lg:justify-between">
+      <section className="relative overflow-hidden bg-slate-950 text-white">
+        <div className="absolute left-1/2 top-0 h-80 w-[120%] -translate-x-1/2 rounded-full bg-gradient-to-r from-cyan-400/30 via-blue-500/20 to-purple-500/10 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl px-6 py-24 lg:flex lg:items-center lg:justify-between">
           <div className="max-w-2xl">
-            <p className="mb-4 inline-flex rounded-full bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
+            <p className="mb-4 inline-flex rounded-full bg-primary/20 px-4 py-2 text-sm font-semibold uppercase tracking-[0.32em] text-primary">
               Africa's Complete School Management System
             </p>
-            <h1 className="text-4xl font-bold tracking-tight text-slate-950 sm:text-5xl">
-              Manage Students, Finance, Academics, Attendance, Communication, HR and Reports from one platform.
+            <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+              One platform for student management, finance, academics and school-wide communication.
             </h1>
-            <p className="mt-6 max-w-xl text-lg text-slate-600">
-              Built for African schools to grow faster, reduce administration overhead, and deliver better academic outcomes.
+            <p className="mt-6 max-w-xl text-lg text-slate-200">
+              Elimu gives schools the tools to run operations faster, keep parents informed, and improve learner success with an elegant, mobile-friendly dashboard.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap gap-4">
               <Link href={{ pathname: "/register-school" }}>
                 <Button>Start Free Trial</Button>
               </Link>
@@ -82,31 +83,50 @@ export default function Home() {
                 <Button variant="outline">Book Demo</Button>
               </Link>
             </div>
+
+            <div className="mt-10 grid gap-4 sm:grid-cols-2">
+              {[
+                { label: "Realtime attendance", value: "Live" },
+                { label: "Fees and billing", value: "Automated" },
+                { label: "Academic planning", value: "CBC Ready" },
+                { label: "Parent communication", value: "WhatsApp + SMS" }
+              ].map((item) => (
+                <div key={item.label} className="rounded-3xl border border-white/10 bg-white/5 p-5 shadow-lg shadow-slate-950/5 backdrop-blur">
+                  <p className="text-sm uppercase tracking-[0.28em] text-slate-300">{item.label}</p>
+                  <p className="mt-3 text-2xl font-semibold text-white">{item.value}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-14 grid grid-cols-2 gap-4 sm:mt-0 sm:grid-cols-3 lg:w-[520px]">
-            {[
-              "Dashboard Preview",
-              "Students",
-              "Finance",
-              "Reports",
-              "Analytics"
-            ].map((item) => (
-              <div key={item} className="rounded-3xl border border-slate-200 bg-slate-50 px-5 py-6 text-center shadow-sm">
-                <p className="text-sm font-semibold text-slate-900">{item}</p>
+          <div className="mt-16 lg:mt-0 lg:w-[520px]">
+            <div className="rounded-[2.5rem] bg-white/95 p-6 shadow-2xl ring-1 ring-slate-200/50">
+              <div className="grid gap-4 sm:grid-cols-2">
+                {[
+                  "Dashboard Preview",
+                  "Students",
+                  "Finance",
+                  "Reports",
+                  "Analytics",
+                  "Messaging"
+                ].map((item) => (
+                  <div key={item} className="rounded-3xl border border-slate-200 bg-slate-50 px-5 py-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:bg-white">
+                    <p className="text-sm font-semibold text-slate-900">{item}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-slate-950 py-16 text-white">
+      <section className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 py-16 text-white">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat) => (
-              <div key={stat.label} className="rounded-3xl bg-white/5 p-8">
-                <p className="text-3xl font-bold">{stat.value}</p>
-                <p className="mt-2 text-sm text-slate-300">{stat.label}</p>
+              <div key={stat.label} className="rounded-3xl bg-slate-900/80 p-8 shadow-xl shadow-slate-950/20 ring-1 ring-white/10">
+                <p className="text-3xl font-bold text-cyan-300">{stat.value}</p>
+                <p className="mt-2 text-sm text-slate-400">{stat.label}</p>
               </div>
             ))}
           </div>
@@ -121,10 +141,12 @@ export default function Home() {
           </div>
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {features.map((feature) => (
-              <article key={feature.title} className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-                <h3 className="text-xl font-semibold text-slate-950">{feature.title}</h3>
-                <p className="mt-3 text-sm text-slate-600">{feature.description}</p>
-                <ul className="mt-5 space-y-3 text-sm text-slate-700">
+              <article key={feature.title} className="rounded-3xl border border-slate-200 bg-white p-8 shadow-[0_20px_70px_-30px_rgba(15,23,42,0.2)]">
+                <div className="inline-flex rounded-2xl bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+                  {feature.title}
+                </div>
+                <p className="mt-5 text-sm text-slate-600">{feature.description}</p>
+                <ul className="mt-6 space-y-3 text-sm text-slate-700">
                   {feature.items.map((item) => (
                     <li key={item} className="flex items-center gap-3">
                       <span className="h-2.5 w-2.5 rounded-full bg-primary" />
@@ -150,7 +172,7 @@ export default function Home() {
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {reasons.map((reason) => (
-                <div key={reason} className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-sm font-semibold text-slate-900">
+                <div key={reason} className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-sm font-semibold text-slate-900 shadow-sm">
                   {reason}
                 </div>
               ))}
@@ -167,7 +189,7 @@ export default function Home() {
           </div>
           <div className="grid gap-6 lg:grid-cols-2">
             {testimonials.map((item) => (
-              <blockquote key={item.quote} className="rounded-3xl border border-slate-800 bg-slate-900 p-10">
+              <blockquote key={item.quote} className="rounded-3xl border border-slate-800 bg-slate-900 p-10 shadow-[0_20px_50px_-30px_rgba(15,23,42,0.8)]">
                 <p className="text-xl leading-8 text-slate-100">“{item.quote}”</p>
                 <footer className="mt-8 text-sm text-slate-400">
                   <p className="font-semibold text-white">{item.name}</p>
@@ -179,10 +201,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 py-20 text-white">
         <div className="mx-auto max-w-7xl px-6 text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary">Ready to transform your school?</p>
-          <h2 className="mt-4 text-3xl font-bold text-slate-950">Get started with Elimu today.</h2>
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-cyan-100">Ready to transform your school?</p>
+          <h2 className="mt-4 text-3xl font-bold sm:text-4xl">Get started with Elimu today.</h2>
           <div className="mt-8 flex flex-wrap justify-center gap-3">
             <Link href={{ pathname: "/register-school" }}>
               <Button>Register School</Button>

@@ -53,7 +53,7 @@ export function LandingFooter() {
       <div className="border-t border-slate-800 bg-slate-900 px-6 py-6 text-sm text-slate-500">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} Elimu Africa. All rights reserved.</p>
-          <p>support@elimu.africa · +254 700 000 000 · WhatsApp</p>
+          <p>support@elimu.africa · Phone: +254 729 989 881 · WhatsApp: +254 795 565 529</p>
         </div>
       </div>
     </footer>

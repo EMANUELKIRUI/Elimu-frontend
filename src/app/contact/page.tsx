@@ -34,8 +34,8 @@ export default function ContactPage() {
             <div className="mt-10 space-y-6 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-slate-900">Contact details</p>
               <p>Email: support@elimu.africa</p>
-              <p>Phone: +254 700 000 000</p>
-              <p>WhatsApp: +254 700 000 000</p>
+              <p>Phone: <a href="tel:+254729989881" className="font-semibold text-slate-900 underline">+254 729 989 881</a></p>
+              <p>WhatsApp: <a href="https://wa.me/254795565529" className="font-semibold text-slate-900 underline">+254 795 565 529</a></p>
               <p>Office: Nairobi, Kenya</p>
             </div>
           </div>
