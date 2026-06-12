@@ -70,7 +70,7 @@ export default function Home() {
               Africa's Complete School Management System
             </p>
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-              One platform for student management, finance, academics and school-wide communication.
+              One platform for school management, finance, academics and school-wide communication.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-slate-200">
               Elimu gives schools the tools to run operations faster, keep parents informed, and improve learner success with an elegant, mobile-friendly dashboard.
