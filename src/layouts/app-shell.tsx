@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import {
   Bell,
   CircleHelp,
@@ -15,8 +16,10 @@ import { Button } from "@/components/ui/button";
 import { SelectField } from "@/components/ui/select";
 import { getVisibleModules } from "@/services/navigation-service";
 import { useAuthStore } from "@/stores/auth-store";
+import { usePermissionStore, initializePermissions } from "@/stores/permission-store";
 import { schools, useCurrentSchoolStore } from "@/stores/current-school-store";
 import { useNotificationStore } from "@/stores/notification-store";
+import { useThemeStore } from "@/stores/theme-store";
 import type { Role, SubscriptionPackage } from "@/types";
 import { cn } from "@/utils/cn";
 
@@ -39,17 +42,30 @@ const packages: SubscriptionPackage[] = ["Basic", "Standard", "Professional", "E
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const { role, setRole, userName, department } = useAuthStore();
-  const { schoolId, packageName, setSchool, setPackageName } = useCurrentSchoolStore();
+  const { role, setRole, userName, department, logout } = useAuthStore();
+  const { schoolId, packageName, setSchool, setPackageName, modules: enabledModules, branding } = useCurrentSchoolStore();
+  const { theme, setTheme } = useThemeStore();
   const unread = useNotificationStore((state) => state.notifications.filter((item) => item.unread).length);
-  const visibleModules = getVisibleModules(role, packageName);
+  const visibleModules = getVisibleModules(role, packageName, enabledModules);
   const currentSchool = schools.find((school) => school.id === schoolId) ?? schools[0];
 
+  useEffect(() => {
+    usePermissionStore.getState().setPermissions(initializePermissions(role, packageName));
+  }, [role, packageName]);
+
   return (
-    <div className="grid min-h-screen bg-background text-foreground lg:grid-cols-[292px_1fr]">
-      <aside className="sticky top-0 z-20 flex h-screen flex-col gap-5 overflow-y-auto bg-[#10251f] p-5 text-white max-lg:static max-lg:h-auto">
+    <div
+      className="grid min-h-screen bg-background text-foreground lg:grid-cols-[292px_1fr]"
+      style={{
+        backgroundImage: `linear-gradient(180deg, ${branding.primaryColor}15, transparent 45%)`
+      }}
+    >
+      <aside
+        className="sticky top-0 z-20 flex h-screen flex-col gap-5 overflow-y-auto p-5 text-white max-lg:static max-lg:h-auto"
+        style={{ backgroundColor: branding.primaryColor }}
+      >
         <div className="flex items-center gap-3">
-          <div className="grid h-11 w-11 place-items-center rounded-md bg-secondary font-black text-secondary-foreground">AE</div>
+          <div className="grid h-11 w-11 place-items-center rounded-md bg-white/10 font-black text-white">AE</div>
           <div>
             <strong className="block">AfricaSchool</strong>
             <span className="text-sm text-white/65">Elimu ERP</span>
@@ -120,7 +136,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               <Bell className="h-5 w-5" />
               {unread > 0 ? <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-destructive" /> : null}
             </IconButton>
-            <IconButton title="Approvals">
+              <IconButton title="Approvals">
               <Inbox className="h-5 w-5" />
             </IconButton>
             <IconButton title="Messages">
@@ -129,9 +145,22 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <IconButton title="Help center">
               <CircleHelp className="h-5 w-5" />
             </IconButton>
-            <Button className="gap-2">
+            <SelectField
+              label="Theme"
+              value={theme}
+              options={[
+                { label: "Light", value: "light" },
+                { label: "Dark", value: "dark" },
+                { label: "System", value: "system" }
+              ]}
+              onValueChange={(value) => setTheme(value as "light" | "dark" | "system")}
+            />
+            <Button className="gap-2" style={{ borderColor: branding.secondaryColor, color: branding.secondaryColor }}>
               <Sparkles className="h-4 w-4" />
               Ask AI
+            </Button>
+            <Button variant="secondary" className="gap-2" onClick={() => logout()}>
+              Logout
             </Button>
             <IconButton title={userName}>
               <UserCircle className="h-5 w-5" />

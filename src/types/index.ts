@@ -54,8 +54,16 @@ export type School = {
   name: string;
   package: SubscriptionPackage;
   activeTerm: string;
-  brandColor: string;
+  modules: ModuleKey[];
+  branding: {
+    logo?: string;
+    primaryColor: string;
+    secondaryColor: string;
+  };
+  settings: Record<string, string>;
 };
+
+export type ThemeMode = "light" | "dark" | "system";
 
 export type NavigationModule = {
   key: ModuleKey;
