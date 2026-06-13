@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LandingFooter } from "@/components/public/landing-footer";
-import { useThemeStore } from "@/stores/theme-store";
 
 const navItems = [
   { href: "#features", label: "Features" },
@@ -14,9 +13,6 @@ const navItems = [
 ];
 
 export function LandingLayout({ children }: { children: React.ReactNode }) {
-  const { theme, setTheme } = useThemeStore();
-  const nextTheme = theme === "dark" ? "light" : "dark";
-
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur">
@@ -32,9 +28,6 @@ export function LandingLayout({ children }: { children: React.ReactNode }) {
             ))}
           </nav>
           <div className="flex flex-wrap items-center gap-2">
-            <Button variant="outline" onClick={() => setTheme(nextTheme)}>
-              {theme === "dark" ? "Light mode" : "Dark mode"}
-            </Button>
             <Link href={{ pathname: "/login" }}>
               <Button variant="ghost">Login</Button>
             </Link>

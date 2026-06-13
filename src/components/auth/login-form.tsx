@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -68,39 +69,99 @@ export function LoginForm() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-md px-4 py-12">
-      <Card>
-        <CardHeader>
-          <CardTitle>Login to AfricaSchool</CardTitle>
-          <CardDescription>Access your school operating system with role-aware permissions and tenant context.</CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-4">
-          <label className="grid gap-2 text-sm">
-            Email
-            <input className="h-11 w-full rounded-md border px-3 text-sm" {...form.register("email")} />
-          </label>
-          <label className="grid gap-2 text-sm">
-            Password
-            <input type="password" className="h-11 w-full rounded-md border px-3 text-sm" {...form.register("password")} />
-          </label>
-          <SelectField
-            label="Role"
-            value={form.watch("role")}
-            options={roles.map((item) => ({ label: item, value: item }))}
-            onValueChange={(value) => form.setValue("role", value as RoleOption)}
-          />
-          <SelectField
-            label="School"
-            value={form.watch("school")}
-            options={schools.map((school) => ({ label: school.name, value: school.id }))}
-            onValueChange={(value) => form.setValue("school", value)}
-          />
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 py-12">
+      <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
+        <section className="rounded-[2rem] border border-slate-200/70 bg-white p-10 shadow-xl shadow-slate-200/60">
+          <div className="max-w-xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary">School login</p>
+            <h1 className="mt-6 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">Secure access for your campus team.</h1>
+            <p className="mt-5 text-lg leading-8 text-slate-600">Sign in to Elimu and manage admissions, classrooms, finances, and communication from one powerful school ERP.</p>
+          </div>
 
-          <Button type="button" onClick={form.handleSubmit(onSubmit)}>
-            Login
-          </Button>
-        </CardContent>
-      </Card>
+          <div className="mt-10 grid gap-4 text-sm text-slate-700 sm:grid-cols-2">
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+              <p className="font-semibold text-slate-950">Role-aware permissions</p>
+              <p className="mt-3 text-slate-600">Every team member sees the right tools for their job.</p>
+            </div>
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+              <p className="font-semibold text-slate-950">School context</p>
+              <p className="mt-3 text-slate-600">Choose the correct campus and continue with confidence.</p>
+            </div>
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+              <p className="font-semibold text-slate-950">Transparent controls</p>
+              <p className="mt-3 text-slate-600">Get access to the modules and reports your role needs most.</p>
+            </div>
+            <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+              <p className="font-semibold text-slate-950">Trusted by schools</p>
+              <p className="mt-3 text-slate-600">Designed for administrators, teachers, and leadership teams.</p>
+            </div>
+          </div>
+        </section>
+
+        <Card className="overflow-hidden">
+          <CardHeader className="bg-slate-950/95 text-white">
+            <div>
+              <CardTitle className="text-2xl">Welcome back</CardTitle>
+              <CardDescription className="text-slate-200">Sign in to continue managing your school with precision.</CardDescription>
+            </div>
+          </CardHeader>
+
+          <CardContent className="grid gap-6 p-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-5">
+              <label className="grid gap-2 text-sm text-slate-700">
+                <span>Email</span>
+                <input
+                  className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                  {...form.register("email")}
+                />
+              </label>
+
+              <label className="grid gap-2 text-sm text-slate-700">
+                <span>Password</span>
+                <input
+                  type="password"
+                  className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                  {...form.register("password")}
+                />
+              </label>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                <SelectField
+                  label="Role"
+                  value={form.watch("role")}
+                  options={roles.map((item) => ({ label: item, value: item }))}
+                  onValueChange={(value) => form.setValue("role", value as RoleOption)}
+                />
+                <SelectField
+                  label="School"
+                  value={form.watch("school")}
+                  options={schools.map((school) => ({ label: school.name, value: school.id }))}
+                  onValueChange={(value) => form.setValue("school", value)}
+                />
+              </div>
+
+              <div className="grid gap-3">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-sm text-slate-500">
+                    Need access?{' '}
+                    <Link href="/register-school" className="font-semibold text-primary hover:underline">
+                      Register your school.
+                    </Link>
+                  </p>
+                  <Button type="submit" className="min-w-[160px]">
+                    Login
+                  </Button>
+                </div>
+                <div className="flex items-center justify-center">
+                  <Link href="/forgot-password" className="text-sm font-medium text-primary transition hover:underline">
+                    Forgot your password?
+                  </Link>
+                </div>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

@@ -19,7 +19,6 @@ import { useAuthStore } from "@/stores/auth-store";
 import { usePermissionStore, initializePermissions } from "@/stores/permission-store";
 import { schools, useCurrentSchoolStore } from "@/stores/current-school-store";
 import { useNotificationStore } from "@/stores/notification-store";
-import { useThemeStore } from "@/stores/theme-store";
 import type { Role, SubscriptionPackage } from "@/types";
 import { cn } from "@/utils/cn";
 
@@ -44,7 +43,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { role, setRole, userName, department, logout } = useAuthStore();
   const { schoolId, packageName, setSchool, setPackageName, modules: enabledModules, branding } = useCurrentSchoolStore();
-  const { theme, setTheme } = useThemeStore();
   const unread = useNotificationStore((state) => state.notifications.filter((item) => item.unread).length);
   const visibleModules = getVisibleModules(role, packageName, enabledModules);
   const currentSchool = schools.find((school) => school.id === schoolId) ?? schools[0];
@@ -145,16 +143,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             <IconButton title="Help center">
               <CircleHelp className="h-5 w-5" />
             </IconButton>
-            <SelectField
-              label="Theme"
-              value={theme}
-              options={[
-                { label: "Light", value: "light" },
-                { label: "Dark", value: "dark" },
-                { label: "System", value: "system" }
-              ]}
-              onValueChange={(value) => setTheme(value as "light" | "dark" | "system")}
-            />
             <Button className="gap-2" style={{ borderColor: branding.secondaryColor, color: branding.secondaryColor }}>
               <Sparkles className="h-4 w-4" />
               Ask AI

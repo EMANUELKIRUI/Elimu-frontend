@@ -26,26 +26,6 @@
     --ring: 168 82% 27%;
   }
 
-  .dark {
-    --background: 166 37% 8%;
-    --foreground: 150 25% 95%;
-    --card: 166 32% 11%;
-    --card-foreground: 150 25% 95%;
-    --primary: 168 72% 42%;
-    --primary-foreground: 166 37% 8%;
-    --secondary: 42 80% 58%;
-    --secondary-foreground: 166 37% 8%;
-    --muted: 166 26% 16%;
-    --muted-foreground: 150 12% 72%;
-    --accent: 206 53% 55%;
-    --accent-foreground: 166 37% 8%;
-    --destructive: 7 62% 55%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 166 20% 21%;
-    --input: 166 20% 21%;
-    --ring: 168 72% 42%;
-  }
-
   * {
     @apply border-border;
   }
