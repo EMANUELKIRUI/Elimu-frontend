@@ -99,7 +99,7 @@ export default function BrandingSettingsPage() {
 
         <div className="flex items-center gap-3">
           <Button type="submit" className="bg-red-600 hover:bg-red-700 text-white">Save branding</Button>
-          {mutation.isLoading ? <span className="text-sm text-slate-500">Saving…</span> : null}
+          {mutation.isPending ? <span className="text-sm text-slate-500">Saving…</span> : null}
         </div>
       </form>
 
