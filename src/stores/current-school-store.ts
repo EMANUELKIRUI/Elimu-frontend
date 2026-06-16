@@ -31,8 +31,8 @@ export const schools: School[] = [
     ],
     branding: {
       logo: "",
-      primaryColor: "#0e7c68",
-      secondaryColor: "#06986c"
+      primaryColor: "12 65% 33%",
+      secondaryColor: "25 30% 60%"
     },
     settings: {
       academicYear: "2026",
@@ -48,8 +48,8 @@ export const schools: School[] = [
     modules: ["students", "academics", "finance", "communication", "library", "transport", "reports", "settings"],
     branding: {
       logo: "",
-      primaryColor: "#376fa8",
-      secondaryColor: "#2f5ea4"
+      primaryColor: "12 65% 33%",
+      secondaryColor: "25 30% 60%"
     },
     settings: {
       academicYear: "2026",
@@ -65,8 +65,8 @@ export const schools: School[] = [
     modules: ["students", "academics", "finance", "events", "reports", "settings"],
     branding: {
       logo: "",
-      primaryColor: "#c58a1e",
-      secondaryColor: "#aa760b"
+      primaryColor: "12 65% 33%",
+      secondaryColor: "25 30% 60%"
     },
     settings: {
       academicYear: "2026",
