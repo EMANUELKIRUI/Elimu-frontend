@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { navigationModules } from "@/modules";
 import type { ModuleKey, School, SubscriptionPackage } from "@/types";
+import { fetchBranding } from "@/services/branding-api";
 
 export const schools: School[] = [
   {
@@ -104,6 +105,24 @@ export const useCurrentSchoolStore = create<CurrentSchoolState>((set) => ({
       branding: school.branding,
       settings: school.settings
     });
+
+    // Attempt to load persisted branding for the selected school
+    (async () => {
+      try {
+        const remote = await fetchBranding(schoolId);
+        if (remote) {
+          set({
+            branding: {
+              logo: remote.logo ?? school.branding.logo,
+              primaryColor: remote.primaryColor ?? school.branding.primaryColor,
+              secondaryColor: remote.secondaryColor ?? school.branding.secondaryColor
+            }
+          });
+        }
+      } catch (e) {
+        // ignore
+      }
+    })();
   },
   setPackageName: (packageName) =>
     set((state) => {
