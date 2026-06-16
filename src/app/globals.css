@@ -7,23 +7,24 @@
 
 @layer base {
   :root {
-    --background: 108 18% 95%;
-    --foreground: 168 19% 11%;
+    /* Red-brown system palette */
+    --background: 20 30% 96%; /* very light warm background */
+    --foreground: 15 18% 12%; /* deep brown text */
     --card: 0 0% 100%;
-    --card-foreground: 168 19% 11%;
-    --primary: 168 82% 27%;
+    --card-foreground: 15 18% 12%;
+    --primary: 12 65% 33%; /* red-brown primary */
     --primary-foreground: 0 0% 100%;
-    --secondary: 42 88% 67%;
-    --secondary-foreground: 168 29% 10%;
-    --muted: 150 17% 92%;
-    --muted-foreground: 165 7% 42%;
-    --accent: 206 49% 44%;
+    --secondary: 25 30% 60%; /* warm secondary */
+    --secondary-foreground: 15 20% 14%;
+    --muted: 25 30% 94%;
+    --muted-foreground: 20 12% 45%;
+    --accent: 12 60% 40%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 7 55% 48%;
+    --destructive: 0 75% 45%;
     --destructive-foreground: 0 0% 100%;
-    --border: 143 14% 86%;
-    --input: 143 14% 86%;
-    --ring: 168 82% 27%;
+    --border: 20 20% 90%;
+    --input: 20 20% 90%;
+    --ring: 12 65% 33%;
   }
 
   * {
