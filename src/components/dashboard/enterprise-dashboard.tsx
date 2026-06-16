@@ -12,6 +12,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuthStore } from "@/stores/auth-store";
 import { useCurrentSchoolStore } from "@/stores/current-school-store";
 import { usePermissionStore } from "@/stores/permission-store";
+import { DashboardStats } from "./dashboard-stats";
+import { DashboardActivitiesAndEvents } from "./dashboard-activities";
 import { approvalItems, financeRows, quickActionsByRole, reportCategories, widgetsByRole } from "./data";
 import { MarksGrid } from "./marks-grid";
 

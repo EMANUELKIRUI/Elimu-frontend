@@ -1,5 +1,11 @@
-import { ModuleRoute } from "@/components/modules/module-route";
+import { AppShell } from "@/layouts/app-shell";
+import { StudentsList } from "@/components/students/students-list";
 
 export default function StudentsPage() {
-  return <ModuleRoute page="students" />;
+  return (
+    <AppShell>
+      <StudentsList />
+    </AppShell>
+  );
 }
+
