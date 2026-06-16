@@ -14,7 +14,7 @@ export default function VerifyPhonePage() {
             placeholder="SMS verification code"
             className="mx-auto w-full max-w-md rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
           />
-          <button className="mx-auto inline-flex rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary/90">
+          <button className="mx-auto inline-flex rounded-xl bg-red-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-red-700">
             Verify phone
           </button>
         </div>

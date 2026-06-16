@@ -99,7 +99,7 @@ export function LoginForm() {
         </section>
 
         <Card className="overflow-hidden">
-          <CardHeader className="bg-slate-950/95 text-white">
+          <CardHeader className="bg-red-600 text-white">
             <div>
               <CardTitle className="text-2xl">Welcome back</CardTitle>
               <CardDescription className="text-slate-200">Sign in to continue managing your school with precision.</CardDescription>
@@ -148,7 +148,7 @@ export function LoginForm() {
                       Register your school.
                     </Link>
                   </p>
-                  <Button type="submit" className="min-w-[160px]">
+                  <Button type="submit" className="min-w-[160px] bg-red-600 hover:bg-red-700 text-white">
                     Login
                   </Button>
                 </div>
