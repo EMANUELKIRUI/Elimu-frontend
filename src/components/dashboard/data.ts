@@ -1,6 +1,6 @@
 import type { ApprovalItem, DashboardWidget, Role } from "@/types";
 
-export const widgetsByRole: Record<Role, DashboardWidget[]> = {
+export const widgetsByRole: Partial<Record<Role, DashboardWidget[]>> = {
   "Platform Admin": [
     { label: "Schools", value: "47", helper: "42 active subscriptions" },
     { label: "Renewals", value: "9", helper: "due this week" },
@@ -82,7 +82,7 @@ export const approvalItems: ApprovalItem[] = [
   { title: "Boarding leave-out batch", module: "boarding", stage: "Administration review", priority: "low" }
 ];
 
-export const quickActionsByRole: Record<Role, string[]> = {
+export const quickActionsByRole: Partial<Record<Role, string[]>> = {
   Teacher: ["Take Attendance", "Enter Marks", "View Timetable"],
   HOD: ["Review Marks", "Approve Request", "Department Report"],
   Bursar: ["Record Payment", "Send Reminder", "Create Invoice"],

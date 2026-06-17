@@ -1,5 +1,5 @@
-import { ModuleRoute } from "@/components/modules/module-route";
+import { StudentProfile } from "@/components/students/student-profile";
 
-export default function StudentProfilePage() {
-  return <ModuleRoute page="students" />;
+export default function StudentProfilePage({ params }: { params: any }) {
+  return <StudentProfile studentId={params.id} />;
 }

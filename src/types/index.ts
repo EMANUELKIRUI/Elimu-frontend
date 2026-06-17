@@ -3,14 +3,22 @@ import type { LucideIcon } from "lucide-react";
 export type SubscriptionPackage = "Basic" | "Standard" | "Professional" | "Enterprise";
 
 export type Role =
+  | "Super Admin"
   | "Platform Admin"
+  | "Ministry Admin"
+  | "Organization Admin"
   | "School Admin"
   | "Board Chairperson"
   | "Principal"
+  | "Teacher"
+  | "Finance Officer"
+  | "Librarian"
+  | "HR Officer"
+  | "Student"
+  | "Parent"
   | "Deputy Principal Academics"
   | "Deputy Principal Administration"
   | "Bursar"
-  | "Teacher"
   | "HOD"
   | "Boarding HOD"
   | "Transport HOD"

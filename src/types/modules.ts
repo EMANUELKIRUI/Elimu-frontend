@@ -45,6 +45,7 @@ export interface Student {
   birthCertificateNo?: string;
   phone?: string;
   email?: string;
+  photoUrl?: string;
   address?: string;
   county?: string;
   subCounty?: string;
@@ -57,6 +58,7 @@ export interface Student {
   allergies?: string;
   medicalConditions?: string;
   disability?: string;
+  balance?: number;
   classId: string;
   className: string;
   streamId: string;

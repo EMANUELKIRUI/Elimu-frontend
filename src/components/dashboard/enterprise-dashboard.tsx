@@ -29,8 +29,8 @@ export function EnterpriseDashboard() {
   const role = useAuthStore((state) => state.role);
   const packageName = useCurrentSchoolStore((state) => state.packageName);
   const canAccess = usePermissionStore((state) => state.canAccess);
-  const widgets = widgetsByRole[role];
-  const quickActions = quickActionsByRole[role];
+  const widgets = widgetsByRole[role] ?? [];
+  const quickActions = quickActionsByRole[role] ?? [];
 
   const { data: health } = useQuery({
     queryKey: ["backend-health"],

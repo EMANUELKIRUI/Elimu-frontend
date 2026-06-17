@@ -3,6 +3,7 @@ import { apiClient } from "@/services/api-client";
 export type AuthLoginPayload = {
   email: string;
   password: string;
+  schoolId?: string;
 };
 
 export type AuthResponse = {
@@ -19,22 +20,32 @@ export type AuthResponse = {
 
 export const authApi = {
   login: async (payload: AuthLoginPayload): Promise<AuthResponse> => {
-    // Placeholder for backend authentication.
-    await new Promise((resolve) => setTimeout(resolve, 250));
-    return {
-      accessToken: "mock-access-token",
-      refreshToken: "mock-refresh-token",
-      user: {
-        id: "user-001",
-        name: "AfricaSchool Operator",
-        email: payload.email,
-        role: "Principal",
-        department: "Leadership"
-      }
-    };
+    const response = await apiClient.post("/auth/login", payload);
+    return response.data;
   },
+
   refreshToken: async (refreshToken: string) => {
     const response = await apiClient.post("/auth/refresh", { refreshToken });
+    return response.data;
+  },
+
+  logout: async () => {
+    const response = await apiClient.post("/auth/logout");
+    return response.data;
+  },
+
+  forgotPassword: async (payload: { email?: string; phone?: string }) => {
+    const response = await apiClient.post("/auth/forgot-password", payload);
+    return response.data;
+  },
+
+  resetPassword: async (payload: { otp: string; password: string; confirmPassword: string }) => {
+    const response = await apiClient.post("/auth/reset-password", payload);
+    return response.data;
+  },
+
+  verifyMfa: async (payload: { code: string }) => {
+    const response = await apiClient.post("/auth/mfa", payload);
     return response.data;
   }
 };

@@ -2,7 +2,7 @@ import * as React from "react";
 import { cn } from "@/utils/cn";
 
 type BadgeProps = React.HTMLAttributes<HTMLSpanElement> & {
-  tone?: "green" | "gold" | "red" | "blue" | "neutral";
+  tone?: "green" | "gold" | "red" | "blue" | "yellow" | "neutral";
 };
 
 export function Badge({ className, tone = "neutral", ...props }: BadgeProps) {
@@ -14,6 +14,7 @@ export function Badge({ className, tone = "neutral", ...props }: BadgeProps) {
         tone === "gold" && "bg-amber-100 text-amber-800",
         tone === "red" && "bg-red-100 text-red-800",
         tone === "blue" && "bg-sky-100 text-sky-800",
+        tone === "yellow" && "bg-amber-100 text-amber-800",
         tone === "neutral" && "bg-muted text-muted-foreground",
         className
       )}

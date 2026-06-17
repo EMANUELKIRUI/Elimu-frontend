@@ -3,7 +3,7 @@ import { useAuthStore } from "@/stores/auth-store";
 import { useCurrentSchoolStore } from "@/stores/current-school-store";
 
 export const apiClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL ?? "https://backend-elimu.onrender.com",
   timeout: 15000,
   headers: {
     "Content-Type": "application/json"

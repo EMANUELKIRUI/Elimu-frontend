@@ -175,7 +175,7 @@ function IconButton({ children, title }: { children: React.ReactNode; title: str
 }
 
 function roleDashboardTitle(role: Role) {
-  const titles: Record<Role, string> = {
+  const titles: Partial<Record<Role, string>> = {
     "Platform Admin": "Platform administration",
     "School Admin": "School setup command",
     "Board Chairperson": "Board governance dashboard",
@@ -189,5 +189,5 @@ function roleDashboardTitle(role: Role) {
     "Transport HOD": "Transport workspace",
     "Discipline HOD": "Discipline workspace"
   };
-  return titles[role];
+  return titles[role] ?? "School dashboard";
 }

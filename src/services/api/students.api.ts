@@ -24,23 +24,28 @@ export const studentsApi = {
       pageSize: pageSize.toString(),
       ...filters
     });
-    return apiClient.get(`/students?${params}`);
+    const response = await apiClient.get(`/students?${params}`);
+    return response.data;
   },
 
   getStudent: async (id: string): Promise<Student> => {
-    return apiClient.get(`/students/${id}`);
+    const response = await apiClient.get(`/students/${id}`);
+    return response.data;
   },
 
   createStudent: async (data: Partial<Student>): Promise<Student> => {
-    return apiClient.post("/students", data);
+    const response = await apiClient.post("/students", data);
+    return response.data;
   },
 
   updateStudent: async (id: string, data: Partial<Student>): Promise<Student> => {
-    return apiClient.patch(`/students/${id}`, data);
+    const response = await apiClient.patch(`/students/${id}`, data);
+    return response.data;
   },
 
   deleteStudent: async (id: string): Promise<void> => {
-    return apiClient.delete(`/students/${id}`);
+    const response = await apiClient.delete(`/students/${id}`);
+    return response.data;
   },
 
   getAcademicRecords: async (studentId: string): Promise<StudentAcademicRecord[]> => {

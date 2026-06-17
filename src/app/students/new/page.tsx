@@ -1,5 +1,5 @@
-import { ModuleRoute } from "@/components/modules/module-route";
+import { redirect } from "next/navigation";
 
 export default function NewStudentPage() {
-  return <ModuleRoute page="students" />;
+  redirect("/students/create");
 }

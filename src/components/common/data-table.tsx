@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useMemo } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import {
   flexRender,
   getCoreRowModel,
@@ -15,7 +15,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface DataTableProps<T> {
-  columns: ColumnDef<T>[];
+  columns: ColumnDef<T, any>[];
   data: T[];
   loading?: boolean;
   pagination?: PaginationState;
@@ -37,11 +37,20 @@ export function DataTable<T>({
   rowCount,
   pageCount
 }: DataTableProps<T>) {
-  const [internalSorting, setInternalSorting] = useMemo(() => [sorting ?? [], onSortingChange ?? setInternalSorting], [sorting, onSortingChange]);
-  const [internalPagination, setInternalPagination] = useMemo(
-    () => [pagination ?? { pageIndex: 0, pageSize: 10 }, onPaginationChange ?? setInternalPagination],
-    [pagination, onPaginationChange]
-  );
+  const [internalSorting, setInternalSorting] = useState<SortingState>(sorting ?? []);
+  const [internalPagination, setInternalPagination] = useState<PaginationState>(pagination ?? { pageIndex: 0, pageSize: 10 });
+
+  useEffect(() => {
+    if (sorting) {
+      setInternalSorting(sorting);
+    }
+  }, [sorting]);
+
+  useEffect(() => {
+    if (pagination) {
+      setInternalPagination(pagination);
+    }
+  }, [pagination]);
 
   const table = useReactTable({
     data,
@@ -56,10 +65,12 @@ export function DataTable<T>({
     onSortingChange: (updater) => {
       const newSorting = typeof updater === "function" ? updater(internalSorting) : updater;
       setInternalSorting(newSorting);
+      onSortingChange?.(newSorting);
     },
     onPaginationChange: (updater) => {
       const newPagination = typeof updater === "function" ? updater(internalPagination) : updater;
       setInternalPagination(newPagination);
+      onPaginationChange?.(newPagination);
     },
     manualPagination: !!pageCount,
     rowCount
