@@ -10,7 +10,6 @@ import { authApi, type AuthLoginPayload } from "@/services/api/auth.api";
 import { useAuthStore } from "@/stores/auth-store";
 import { useCurrentSchoolStore, schools } from "@/stores/current-school-store";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { SelectField } from "@/components/ui/select";
 import { Eye, EyeOff } from "lucide-react";
 import type { Role } from "@/types";
