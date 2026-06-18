@@ -11,14 +11,34 @@ import { useAuthStore } from "@/stores/auth-store";
 import { useCurrentSchoolStore, schools } from "@/stores/current-school-store";
 import { Button } from "@/components/ui/button";
 import { SelectField } from "@/components/ui/select";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Eye, EyeOff } from "lucide-react";
 import type { Role } from "@/types";
 
-const loginSchema = z.object({
-  email: z.string().email("Enter a valid email"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-  school: z.string().min(1, "Select your school")
-});
+const loginMethodEnum = z.enum(["email", "username", "schoolCode"]);
+
+type LoginMethod = z.infer<typeof loginMethodEnum>;
+
+const loginSchema = z
+  .object({
+    loginMethod: loginMethodEnum,
+    email: z.string().email("Enter a valid email").optional(),
+    username: z.string().min(3, "Enter your username").optional(),
+    schoolCode: z.string().min(3, "Enter your school code").optional(),
+    password: z.string().min(6, "Password must be at least 6 characters"),
+    school: z.string().min(1, "Select your school")
+  })
+  .superRefine((data, ctx) => {
+    if (data.loginMethod === "email" && !data.email) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["email"], message: "Email is required for email login." });
+    }
+    if (data.loginMethod === "username" && !data.username) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["username"], message: "Username is required for username login." });
+    }
+    if (data.loginMethod === "schoolCode" && !data.schoolCode) {
+      ctx.addIssue({ code: z.ZodIssueCode.custom, path: ["schoolCode"], message: "School code is required for school code login." });
+    }
+  });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
@@ -34,7 +54,10 @@ export function LoginForm() {
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
+      loginMethod: "email",
       email: "admin@africaschool.local",
+      username: "",
+      schoolCode: "",
       password: "secret123",
       school: schools[0]?.id ?? ""
     }
@@ -44,9 +67,11 @@ export function LoginForm() {
     setErrorMessage(null);
     setIsSubmitting(true);
 
+    const identifier = data.loginMethod === "email" ? data.email ?? "" : data.loginMethod === "username" ? data.username ?? "" : data.schoolCode ?? "";
+
     try {
       const result = await authApi.login({
-        email: data.email,
+        identifier,
         password: data.password,
         schoolId: data.school
       });
@@ -128,14 +153,55 @@ export function LoginForm() {
 
           <CardContent className="grid gap-6 p-8">
             <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-5">
-              <label className="grid gap-2 text-sm text-slate-700">
-                <span>Email</span>
-                <input
-                  className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                  {...form.register("email")}
-                />
-                {form.formState.errors.email && <span className="text-sm text-red-600">{form.formState.errors.email.message}</span>}
-              </label>
+              <div className="grid gap-2 text-sm text-slate-700">
+                <span className="font-medium">Login method</span>
+                <div className="grid grid-cols-3 gap-2">
+                  {([
+                    { value: "email", label: "Email" },
+                    { value: "username", label: "Username" },
+                    { value: "schoolCode", label: "School code" }
+                  ] as const).map((option) => (
+                    <label key={option.value} className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700">
+                      <input
+                        type="radio"
+                        value={option.value}
+                        {...form.register("loginMethod")}
+                        className="h-4 w-4 accent-primary"
+                      />
+                      {option.label}
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {form.watch("loginMethod") === "email" ? (
+                <label className="grid gap-2 text-sm text-slate-700">
+                  <span>Email</span>
+                  <input
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    {...form.register("email")}
+                  />
+                  {form.formState.errors.email && <span className="text-sm text-red-600">{form.formState.errors.email.message}</span>}
+                </label>
+              ) : form.watch("loginMethod") === "username" ? (
+                <label className="grid gap-2 text-sm text-slate-700">
+                  <span>Username</span>
+                  <input
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    {...form.register("username")}
+                  />
+                  {form.formState.errors.username && <span className="text-sm text-red-600">{form.formState.errors.username.message}</span>}
+                </label>
+              ) : (
+                <label className="grid gap-2 text-sm text-slate-700">
+                  <span>School code</span>
+                  <input
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    {...form.register("schoolCode")}
+                  />
+                  {form.formState.errors.schoolCode && <span className="text-sm text-red-600">{form.formState.errors.schoolCode.message}</span>}
+                </label>
+              )}
 
               <label className="grid gap-2 text-sm text-slate-700">
                 <span>Password</span>

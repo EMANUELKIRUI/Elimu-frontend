@@ -1,7 +1,7 @@
 import { apiClient } from "@/services/api-client";
 
 export type AuthLoginPayload = {
-  email: string;
+  identifier: string;
   password: string;
   schoolId?: string;
 };
