@@ -9,22 +9,46 @@ type Option = {
   value: string;
 };
 
-export function SelectField({
-  label,
-  value,
-  options,
-  onValueChange
-}: {
+type SelectFieldProps = {
   label: string;
   value: string;
   options: Option[];
   onValueChange: (value: string) => void;
-}) {
+  className?: string;
+  labelClassName?: string;
+  variant?: "default" | "light";
+};
+
+export function SelectField({
+  label,
+  value,
+  options,
+  onValueChange,
+  className,
+  labelClassName,
+  variant = "default"
+}: SelectFieldProps) {
   return (
-    <label className="grid gap-2">
-      <span className="text-xs font-bold uppercase tracking-[0.08em] text-white/65">{label}</span>
+    <label className={cn("grid gap-2", className)}>
+      <span
+        className={cn(
+          "text-xs font-bold uppercase tracking-[0.08em]",
+          variant === "light" ? "text-slate-700" : "text-white/65",
+          labelClassName
+        )}
+      >
+        {label}
+      </span>
       <SelectPrimitive.Root value={value} onValueChange={onValueChange}>
-        <SelectPrimitive.Trigger className="flex h-11 items-center justify-between rounded-md border border-white/15 bg-white/10 px-3 text-left text-sm text-white outline-none focus:ring-2 focus:ring-secondary">
+        <SelectPrimitive.Trigger
+          className={cn(
+            "flex h-11 items-center justify-between rounded-md px-3 text-left text-sm outline-none focus:ring-2",
+            variant === "light"
+              ? "border border-slate-300 bg-white text-slate-900 focus:border-primary focus:ring-primary/20"
+              : "border border-white/15 bg-white/10 text-white focus:border-secondary focus:ring-secondary",
+            className
+          )}
+        >
           <SelectPrimitive.Value />
           <SelectPrimitive.Icon>
             <ChevronDown className="h-4 w-4" />

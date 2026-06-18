@@ -18,7 +18,7 @@ export default function AdminLoginPage() {
     }
 
     document.cookie = "elimu_token=superadmin; path=/; max-age=3600";
-    router.push("/admin/dashboard");
+    router.push("/admin/dashboard" as any);
   };
 
   return (

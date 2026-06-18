@@ -55,10 +55,10 @@ export function LoginForm() {
     resolver: zodResolver(loginSchema),
     defaultValues: {
       loginMethod: "email",
-      email: "admin@africaschool.local",
+      email: "",
       username: "",
       schoolCode: "",
-      password: "secret123",
+      password: "",
       school: schools[0]?.id ?? ""
     }
   });
@@ -119,30 +119,25 @@ export function LoginForm() {
                 </div>
 
                 <h1 className="mt-8 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
-                  Secure school access for principals, teachers, and staff.
+                  Welcome back to your school dashboard.
                 </h1>
                 <p className="mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
-                  One platform for school administration, academics, attendance, finance, and communication. Log in securely with email, username, or school code.
+                  Sign in securely with your school account to manage attendance, academics, finance, and communication.
                 </p>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
                 {[
-                  { title: "MFA ready", body: "Protect accounts with secure verification and session controls." },
-                  { title: "Role-based access", body: "Grant principals, teachers and finance officers the right workspace." },
-                  { title: "School switching", body: "Switch between school tenants quickly from one account." },
-                  { title: "Responsive dashboards", body: "Use desktop or mobile to manage attendance, fees and reports." }
+                  { title: "Fast access", body: "Sign in with email, username, or school code in a few clicks." },
+                  { title: "School-specific roles", body: "Principals, teachers, and staff get the exact tools they need." },
+                  { title: "Secure sessions", body: "Keep your account safe with modern password controls." },
+                  { title: "Responsive experience", body: "The login page works smoothly on phones, tablets, and desktops." }
                 ].map((feature) => (
                   <div key={feature.title} className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                     <h2 className="text-lg font-semibold text-slate-950">{feature.title}</h2>
                     <p className="mt-2 text-sm leading-6 text-slate-600">{feature.body}</p>
                   </div>
                 ))}
-              </div>
-
-              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-sm text-slate-600 shadow-sm">
-                <p className="font-semibold text-slate-950">Trusted by modern schools</p>
-                <p className="mt-3 leading-7">Elimu gives your institution enterprise-grade access controls, fast onboarding, and a clean experience for administrators and teachers.</p>
               </div>
             </section>
 
@@ -284,6 +279,7 @@ export function LoginForm() {
                         <span>School</span>
                         <SelectField
                           label="School"
+                          variant="light"
                           value={form.watch("school")}
                           options={schools.map((school) => ({ label: school.name, value: school.id }))}
                           onValueChange={(value) => form.setValue("school", value)}
