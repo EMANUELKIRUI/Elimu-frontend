@@ -109,10 +109,10 @@ export function LoginForm() {
         <div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
         <div className="pointer-events-none absolute left-1/2 top-10 h-96 w-96 -translate-x-1/2 rounded-full bg-violet-500/10 blur-3xl" />
 
-        <div className="relative mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-4 py-12 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-[2rem] bg-white/95 shadow-[0_80px_120px_-40px_rgba(15,23,42,0.25)] backdrop-blur-sm">
-            <section className="p-8 sm:p-10 lg:p-12">
-              <div className="mb-8 rounded-3xl bg-slate-950/95 p-6 text-white shadow-lg shadow-slate-950/20 sm:p-8">
+        <div className="relative mx-auto flex min-h-screen max-w-5xl flex-col justify-center px-8 py-20 sm:px-10 lg:px-12">
+          <div className="overflow-hidden rounded-[2rem] bg-white/95 border border-slate-200 shadow-[0_80px_120px_-40px_rgba(15,23,42,0.25)] backdrop-blur-sm">
+            <section className="p-12 sm:p-14 lg:p-16">
+              <div className="mb-8 rounded-3xl bg-slate-950/95 p-10 text-white shadow-lg shadow-slate-950/20 sm:p-12">
                 <p className="text-sm uppercase tracking-[0.24em] text-cyan-300">School login</p>
                 <h2 className="mt-4 text-3xl font-black">Sign in to your workspace</h2>
                 <p className="mt-3 text-sm text-slate-300">Use your credentials and school account to access your institution dashboard.</p>
@@ -126,8 +126,8 @@ export function LoginForm() {
                   </div>
                 </CardHeader>
 
-                <CardContent className="grid gap-6 p-8">
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-5">
+                <CardContent className="grid gap-6 p-10">
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-6">
                     <fieldset className="grid gap-3 text-sm text-slate-700">
                       <legend className="font-semibold text-slate-900">Login method</legend>
                       <div className="grid gap-2 sm:grid-cols-3">
@@ -140,7 +140,7 @@ export function LoginForm() {
                             key={option.value}
                             htmlFor={`login-method-${option.value}`}
                             className={
-                              "flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm font-medium transition focus-within:ring-2 focus-within:ring-primary/30 " +
+                              "flex cursor-pointer items-center gap-3 rounded-2xl border px-5 py-4 text-sm font-medium transition focus-within:ring-2 focus-within:ring-primary/30 " +
                               (loginMethod === option.value
                                 ? "border-primary bg-primary/10 text-slate-900 shadow-sm"
                                 : "border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300")
@@ -221,7 +221,7 @@ export function LoginForm() {
                         <input
                           id="login-password"
                           type={showPassword ? "text" : "password"}
-                          className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 pr-12 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                          className="h-14 w-full rounded-2xl border border-slate-200 bg-slate-50 px-5 pr-14 text-base text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                           placeholder="Enter your password"
                           autoComplete="current-password"
                           {...form.register("password")}
@@ -275,7 +275,7 @@ export function LoginForm() {
                     <div className="grid gap-4">
                       <Button
                         type="submit"
-                        className="w-full rounded-2xl bg-cyan-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-cyan-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500"
+                        className="w-full rounded-2xl bg-cyan-600 px-6 py-4 text-base font-semibold text-white transition hover:bg-cyan-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500"
                       >
                         {isSubmitting ? "Signing in..." : "Sign In"}
                       </Button>
