@@ -104,7 +104,7 @@ export function LoginForm() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-900" aria-label="Elimu login page0" aria-label="Elimu login page">
+    <main className="min-h-screen bg-slate-950 text-slate-900" aria-label="Elimu login page">
       <div className="relative overflow-hidden">
         <div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
         <div className="pointer-events-none absolute left-1/2 top-10 h-96 w-96 -translate-x-1/2 rounded-full bg-violet-500/10 blur-3xl" />
