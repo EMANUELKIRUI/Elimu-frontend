@@ -303,8 +303,11 @@ export function LoginForm() {
                     )}
 
                     <div className="grid gap-4">
-                      <Button type="submit" className="h-12 rounded-2xl bg-slate-950 text-white hover:bg-slate-800">
-                        {isSubmitting ? "Signing in..." : "Login"}
+                      <Button
+                        type="submit"
+                        className="w-full rounded-2xl bg-cyan-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-cyan-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-500"
+                      >
+                        {isSubmitting ? "Signing in..." : "Sign In"}
                       </Button>
                       <div className="flex flex-col gap-3 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
                         <p>
