@@ -63,6 +63,8 @@ export function LoginForm() {
     }
   });
 
+  const loginMethod = form.watch("loginMethod");
+
   const onSubmit = async (data: LoginFormValues) => {
     setErrorMessage(null);
     setIsSubmitting(true);
@@ -102,167 +104,191 @@ export function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-100 py-12">
-      <div className="mx-auto grid w-full max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8">
-        <section className="relative overflow-hidden rounded-[2rem] border border-slate-200/70 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 p-10 text-white shadow-xl shadow-slate-950/40">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(56,189,248,0.18),_transparent_35%)]" />
-          <div className="relative z-10 flex flex-col justify-between h-full gap-8">
-            <div>
-              <div className="mb-8 flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-white/10 text-3xl font-black text-cyan-300">E</div>
-                <div>
-                  <p className="text-sm uppercase tracking-[0.24em] text-cyan-300">Elimu Education OS</p>
-                  <h2 className="mt-2 text-3xl font-black sm:text-4xl">Nairobi Hills Academy</h2>
+    <div className="min-h-screen bg-slate-950 text-slate-900">
+      <div className="relative overflow-hidden">
+        <div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+        <div className="pointer-events-none absolute left-1/2 top-10 h-96 w-96 -translate-x-1/2 rounded-full bg-violet-500/10 blur-3xl" />
+
+        <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-4 py-12 sm:px-6 lg:px-8">
+          <div className="grid gap-10 overflow-hidden rounded-[2rem] bg-white/95 shadow-[0_80px_120px_-40px_rgba(15,23,42,0.25)] backdrop-blur-sm md:grid-cols-[1.2fr_0.9fr] lg:gap-12">
+            <section className="flex flex-col justify-between gap-8 p-8 sm:p-10 lg:p-12">
+              <div>
+                <div className="inline-flex items-center gap-3 rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-slate-950/20">
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-cyan-400 text-slate-950">E</span>
+                  Elimu Education OS
                 </div>
+
+                <h1 className="mt-8 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
+                  Secure school access for principals, teachers, and staff.
+                </h1>
+                <p className="mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
+                  One platform for school administration, academics, attendance, finance, and communication. Log in securely with email, username, or school code.
+                </p>
               </div>
-              <p className="max-w-xl text-base leading-7 text-slate-200">
-                Access admissions, academics, attendance, finance, and transport from a single secure school operating system.
-              </p>
-            </div>
-
-            <div className="grid gap-4 rounded-3xl border border-white/10 bg-slate-950/80 p-6 text-sm shadow-lg shadow-slate-950/20">
-              <p className="font-semibold text-cyan-300">Announcements</p>
-              <ul className="space-y-3 text-slate-300">
-                <li>• New term classes open for enrollment.</li>
-                <li>• Fee payment deadlines set for 30th June.</li>
-                <li>• Accepting student transfer requests through the portal.</li>
-              </ul>
-            </div>
-
-            <div className="grid gap-4 rounded-3xl border border-white/10 bg-slate-950/80 p-6 text-sm shadow-lg shadow-slate-950/20">
-              <p className="font-semibold text-cyan-300">School Resources</p>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <span>Dashboard access</span>
-                <span className="rounded-full bg-cyan-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-cyan-200">Live</span>
-              </div>
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <span>Student records</span>
-                <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-slate-200">Secure</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <Card className="overflow-hidden">
-          <CardHeader className="bg-red-600 text-white">
-            <div>
-              <CardTitle className="text-2xl">Welcome back</CardTitle>
-              <CardDescription className="text-slate-200">Sign in to continue managing your school with confidence.</CardDescription>
-            </div>
-          </CardHeader>
-
-          <CardContent className="grid gap-6 p-8">
-            <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-5">
-              <div className="grid gap-2 text-sm text-slate-700">
-                <span className="font-medium">Login method</span>
-                <div className="grid grid-cols-3 gap-2">
-                  {([
-                    { value: "email", label: "Email" },
-                    { value: "username", label: "Username" },
-                    { value: "schoolCode", label: "School code" }
-                  ] as const).map((option) => (
-                    <label key={option.value} className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-700">
-                      <input
-                        type="radio"
-                        value={option.value}
-                        {...form.register("loginMethod")}
-                        className="h-4 w-4 accent-primary"
-                      />
-                      {option.label}
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {form.watch("loginMethod") === "email" ? (
-                <label className="grid gap-2 text-sm text-slate-700">
-                  <span>Email</span>
-                  <input
-                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    {...form.register("email")}
-                  />
-                  {form.formState.errors.email && <span className="text-sm text-red-600">{form.formState.errors.email.message}</span>}
-                </label>
-              ) : form.watch("loginMethod") === "username" ? (
-                <label className="grid gap-2 text-sm text-slate-700">
-                  <span>Username</span>
-                  <input
-                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    {...form.register("username")}
-                  />
-                  {form.formState.errors.username && <span className="text-sm text-red-600">{form.formState.errors.username.message}</span>}
-                </label>
-              ) : (
-                <label className="grid gap-2 text-sm text-slate-700">
-                  <span>School code</span>
-                  <input
-                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    {...form.register("schoolCode")}
-                  />
-                  {form.formState.errors.schoolCode && <span className="text-sm text-red-600">{form.formState.errors.schoolCode.message}</span>}
-                </label>
-              )}
-
-              <label className="grid gap-2 text-sm text-slate-700">
-                <span>Password</span>
-                <div className="relative">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 pr-12 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    {...form.register("password")}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword((current) => !current)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-900"
-                  >
-                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
-                  </button>
-                </div>
-                {form.formState.errors.password && <span className="text-sm text-red-600">{form.formState.errors.password.message}</span>}
-              </label>
 
               <div className="grid gap-4 sm:grid-cols-2">
-                <SelectField
-                  label="School"
-                  value={form.watch("school")}
-                  options={schools.map((school) => ({ label: school.name, value: school.id }))}
-                  onValueChange={(value) => form.setValue("school", value)}
-                />
-                <label className="inline-flex items-center gap-2 text-sm text-slate-700">
-                  <input
-                    type="checkbox"
-                    checked={rememberMe}
-                    onChange={(event) => setRememberMe(event.target.checked)}
-                    className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
-                  />
-                  Remember me
-                </label>
+                {[
+                  { title: "MFA ready", body: "Protect accounts with secure verification and session controls." },
+                  { title: "Role-based access", body: "Grant principals, teachers and finance officers the right workspace." },
+                  { title: "School switching", body: "Switch between school tenants quickly from one account." },
+                  { title: "Responsive dashboards", body: "Use desktop or mobile to manage attendance, fees and reports." }
+                ].map((feature) => (
+                  <div key={feature.title} className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+                    <h2 className="text-lg font-semibold text-slate-950">{feature.title}</h2>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">{feature.body}</p>
+                  </div>
+                ))}
               </div>
 
-              {errorMessage && <div className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">{errorMessage}</div>}
-
-              <div className="grid gap-3">
-                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-sm text-slate-500">
-                    Don&apos;t have access?{' '}
-                    <Link href="/register-school" className="font-semibold text-primary hover:underline">
-                      Register your school.
-                    </Link>
-                  </p>
-                  <Button type="submit" className="min-w-[160px] bg-red-600 hover:bg-red-700 text-white" disabled={isSubmitting}>
-                    {isSubmitting ? "Signing in..." : "Login"}
-                  </Button>
-                </div>
-                <div className="flex items-center justify-center">
-                  <Link href={"/auth/forgot-password" as any} className="text-sm font-medium text-primary transition hover:underline">
-                    Forgot your password?
-                  </Link>
-                </div>
+              <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 text-sm text-slate-600 shadow-sm">
+                <p className="font-semibold text-slate-950">Trusted by modern schools</p>
+                <p className="mt-3 leading-7">Elimu gives your institution enterprise-grade access controls, fast onboarding, and a clean experience for administrators and teachers.</p>
               </div>
-            </form>
-          </CardContent>
-        </Card>
+            </section>
+
+            <section className="p-8 sm:p-10 lg:p-12">
+              <div className="mb-8 rounded-3xl bg-slate-950/95 p-6 text-white shadow-lg shadow-slate-950/20 sm:p-8">
+                <p className="text-sm uppercase tracking-[0.24em] text-cyan-300">School login</p>
+                <h2 className="mt-4 text-3xl font-black">Sign in to your workspace</h2>
+                <p className="mt-3 text-sm text-slate-300">Use your credentials and school account to access your institution dashboard.</p>
+              </div>
+
+              <Card className="overflow-hidden">
+                <CardHeader className="bg-slate-950 text-white">
+                  <div>
+                    <CardTitle className="text-2xl">Login to Elimu</CardTitle>
+                    <CardDescription className="text-slate-300">Secure access with flexible identifier options and MFA support.</CardDescription>
+                  </div>
+                </CardHeader>
+
+                <CardContent className="grid gap-6 p-8">
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-5">
+                    <div className="grid gap-3 text-sm text-slate-700">
+                      <span className="font-semibold text-slate-900">Login method</span>
+                      <div className="grid gap-2 sm:grid-cols-3">
+                        {([
+                          { value: "email", label: "Email" },
+                          { value: "username", label: "Username" },
+                          { value: "schoolCode", label: "School code" }
+                        ] as const).map((option) => (
+                          <label
+                            key={option.value}
+                            className={
+                              "flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm font-medium transition " +
+                              (loginMethod === option.value
+                                ? "border-primary bg-primary/10 text-slate-900 shadow-sm"
+                                : "border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300")
+                            }
+                          >
+                            <input
+                              type="radio"
+                              value={option.value}
+                              {...form.register("loginMethod")}
+                              className="h-4 w-4 accent-primary"
+                            />
+                            {option.label}
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+
+                    {loginMethod === "email" ? (
+                      <label className="grid gap-2 text-sm text-slate-700">
+                        <span>Email</span>
+                        <input
+                          className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                          placeholder="name@school.org"
+                          {...form.register("email")}
+                        />
+                        {form.formState.errors.email && <span className="text-sm text-red-600">{form.formState.errors.email.message}</span>}
+                      </label>
+                    ) : loginMethod === "username" ? (
+                      <label className="grid gap-2 text-sm text-slate-700">
+                        <span>Username</span>
+                        <input
+                          className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                          placeholder="schooladmin"
+                          {...form.register("username")}
+                        />
+                        {form.formState.errors.username && <span className="text-sm text-red-600">{form.formState.errors.username.message}</span>}
+                      </label>
+                    ) : (
+                      <label className="grid gap-2 text-sm text-slate-700">
+                        <span>School code</span>
+                        <input
+                          className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                          placeholder="STMARYS123"
+                          {...form.register("schoolCode")}
+                        />
+                        {form.formState.errors.schoolCode && <span className="text-sm text-red-600">{form.formState.errors.schoolCode.message}</span>}
+                      </label>
+                    )}
+
+                    <label className="grid gap-2 text-sm text-slate-700">
+                      <span>Password</span>
+                      <div className="relative">
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 pr-12 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
+                          placeholder="Enter your password"
+                          {...form.register("password")}
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword((current) => !current)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 transition hover:text-slate-900"
+                        >
+                          {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                        </button>
+                      </div>
+                      {form.formState.errors.password && <span className="text-sm text-red-600">{form.formState.errors.password.message}</span>}
+                    </label>
+
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="grid gap-2 text-sm text-slate-700">
+                        <span>School</span>
+                        <SelectField
+                          label="School"
+                          value={form.watch("school")}
+                          options={schools.map((school) => ({ label: school.name, value: school.id }))}
+                          onValueChange={(value) => form.setValue("school", value)}
+                        />
+                      </div>
+                      <label className="inline-flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-700">
+                        <input
+                          type="checkbox"
+                          checked={rememberMe}
+                          onChange={(event) => setRememberMe(event.target.checked)}
+                          className="h-4 w-4 rounded border-slate-300 text-primary focus:ring-primary"
+                        />
+                        Remember me
+                      </label>
+                    </div>
+
+                    {errorMessage && <div className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">{errorMessage}</div>}
+
+                    <div className="grid gap-4">
+                      <Button type="submit" className="h-12 rounded-2xl bg-slate-950 text-white hover:bg-slate-800">
+                        {isSubmitting ? "Signing in..." : "Login"}
+                      </Button>
+                      <div className="flex flex-col gap-3 text-sm text-slate-600 sm:flex-row sm:items-center sm:justify-between">
+                        <p>
+                          Don&apos;t have access?{' '}
+                          <Link href="/register-school" className="font-semibold text-primary hover:underline">
+                            Register your school
+                          </Link>
+                        </p>
+                        <Link href={"/auth/forgot-password" as any} className="font-medium text-primary hover:underline">
+                          Forgot password?
+                        </Link>
+                      </div>
+                    </div>
+                  </form>
+                </CardContent>
+              </Card>
+            </section>
+          </div>
+        </div>
       </div>
     </div>
   );
