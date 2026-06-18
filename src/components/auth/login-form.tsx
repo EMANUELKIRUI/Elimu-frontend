@@ -109,38 +109,8 @@ export function LoginForm() {
         <div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
         <div className="pointer-events-none absolute left-1/2 top-10 h-96 w-96 -translate-x-1/2 rounded-full bg-violet-500/10 blur-3xl" />
 
-        <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-4 py-12 sm:px-6 lg:px-8">
-          <div className="grid gap-10 overflow-hidden rounded-[2rem] bg-white/95 shadow-[0_80px_120px_-40px_rgba(15,23,42,0.25)] backdrop-blur-sm md:grid-cols-[1.2fr_0.9fr] lg:gap-12">
-            <section className="flex flex-col justify-between gap-8 p-8 sm:p-10 lg:p-12">
-              <div>
-                <div className="inline-flex items-center gap-3 rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-slate-950/20">
-                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-cyan-400 text-slate-950">E</span>
-                  Elimu Education OS
-                </div>
-
-                <h1 className="mt-8 text-4xl font-black tracking-tight text-slate-950 sm:text-5xl">
-                  Welcome back to your school dashboard.
-                </h1>
-                <p className="mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
-                  Sign in securely with your school account to manage attendance, academics, finance, and communication.
-                </p>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                {[
-                  { title: "Fast access", body: "Sign in with email, username, or school code in a few clicks." },
-                  { title: "School-specific roles", body: "Principals, teachers, and staff get the exact tools they need." },
-                  { title: "Secure sessions", body: "Keep your account safe with modern password controls." },
-                  { title: "Responsive experience", body: "The login page works smoothly on phones, tablets, and desktops." }
-                ].map((feature) => (
-                  <div key={feature.title} className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-                    <h2 className="text-lg font-semibold text-slate-950">{feature.title}</h2>
-                    <p className="mt-2 text-sm leading-6 text-slate-600">{feature.body}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
+        <div className="relative mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-4 py-12 sm:px-6 lg:px-8">
+          <div className="overflow-hidden rounded-[2rem] bg-white/95 shadow-[0_80px_120px_-40px_rgba(15,23,42,0.25)] backdrop-blur-sm">
             <section className="p-8 sm:p-10 lg:p-12">
               <div className="mb-8 rounded-3xl bg-slate-950/95 p-6 text-white shadow-lg shadow-slate-950/20 sm:p-8">
                 <p className="text-sm uppercase tracking-[0.24em] text-cyan-300">School login</p>
