@@ -30,7 +30,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             {navItems.map((item) => (
               <Link
                 key={item.href}
-                href={item.href}
+                href={{ pathname: item.href }}
                 className="block rounded-2xl px-4 py-3 transition hover:bg-slate-50 hover:text-slate-950"
               >
                 {item.label}
