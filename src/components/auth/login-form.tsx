@@ -104,7 +104,7 @@ export function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-900">
+    <main className="min-h-screen bg-slate-950 text-slate-900" aria-label="Elimu login page0" aria-label="Elimu login page">
       <div className="relative overflow-hidden">
         <div className="pointer-events-none absolute -right-24 top-0 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
         <div className="pointer-events-none absolute left-1/2 top-10 h-96 w-96 -translate-x-1/2 rounded-full bg-violet-500/10 blur-3xl" />
@@ -163,8 +163,8 @@ export function LoginForm() {
 
                 <CardContent className="grid gap-6 p-8">
                   <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-5">
-                    <div className="grid gap-3 text-sm text-slate-700">
-                      <span className="font-semibold text-slate-900">Login method</span>
+                    <fieldset className="grid gap-3 text-sm text-slate-700">
+                      <legend className="font-semibold text-slate-900">Login method</legend>
                       <div className="grid gap-2 sm:grid-cols-3">
                         {([
                           { value: "email", label: "Email" },
@@ -173,14 +173,16 @@ export function LoginForm() {
                         ] as const).map((option) => (
                           <label
                             key={option.value}
+                            htmlFor={`login-method-${option.value}`}
                             className={
-                              "flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm font-medium transition " +
+                              "flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm font-medium transition focus-within:ring-2 focus-within:ring-primary/30 " +
                               (loginMethod === option.value
                                 ? "border-primary bg-primary/10 text-slate-900 shadow-sm"
                                 : "border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300")
                             }
                           >
                             <input
+                              id={`login-method-${option.value}`}
                               type="radio"
                               value={option.value}
                               {...form.register("loginMethod")}
@@ -190,58 +192,91 @@ export function LoginForm() {
                           </label>
                         ))}
                       </div>
-                    </div>
+                    </fieldset>
 
                     {loginMethod === "email" ? (
-                      <label className="grid gap-2 text-sm text-slate-700">
+                      <label htmlFor="login-email" className="grid gap-2 text-sm text-slate-700">
                         <span>Email</span>
                         <input
+                          id="login-email"
                           className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                           placeholder="name@school.org"
+                          autoComplete="email"
                           {...form.register("email")}
+                          aria-invalid={form.formState.errors.email ? "true" : "false"}
+                          aria-describedby={form.formState.errors.email ? "login-email-error" : undefined}
                         />
-                        {form.formState.errors.email && <span className="text-sm text-red-600">{form.formState.errors.email.message}</span>}
+                        {form.formState.errors.email && (
+                          <span id="login-email-error" className="text-sm text-red-600">
+                            {form.formState.errors.email.message}
+                          </span>
+                        )}
                       </label>
                     ) : loginMethod === "username" ? (
-                      <label className="grid gap-2 text-sm text-slate-700">
+                      <label htmlFor="login-username" className="grid gap-2 text-sm text-slate-700">
                         <span>Username</span>
                         <input
+                          id="login-username"
                           className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                           placeholder="schooladmin"
+                          autoComplete="username"
                           {...form.register("username")}
+                          aria-invalid={form.formState.errors.username ? "true" : "false"}
+                          aria-describedby={form.formState.errors.username ? "login-username-error" : undefined}
                         />
-                        {form.formState.errors.username && <span className="text-sm text-red-600">{form.formState.errors.username.message}</span>}
+                        {form.formState.errors.username && (
+                          <span id="login-username-error" className="text-sm text-red-600">
+                            {form.formState.errors.username.message}
+                          </span>
+                        )}
                       </label>
                     ) : (
-                      <label className="grid gap-2 text-sm text-slate-700">
+                      <label htmlFor="login-school-code" className="grid gap-2 text-sm text-slate-700">
                         <span>School code</span>
                         <input
+                          id="login-school-code"
                           className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                           placeholder="STMARYS123"
+                          autoComplete="organization"
                           {...form.register("schoolCode")}
+                          aria-invalid={form.formState.errors.schoolCode ? "true" : "false"}
+                          aria-describedby={form.formState.errors.schoolCode ? "login-school-code-error" : undefined}
                         />
-                        {form.formState.errors.schoolCode && <span className="text-sm text-red-600">{form.formState.errors.schoolCode.message}</span>}
+                        {form.formState.errors.schoolCode && (
+                          <span id="login-school-code-error" className="text-sm text-red-600">
+                            {form.formState.errors.schoolCode.message}
+                          </span>
+                        )}
                       </label>
                     )}
 
-                    <label className="grid gap-2 text-sm text-slate-700">
+                    <label htmlFor="login-password" className="grid gap-2 text-sm text-slate-700">
                       <span>Password</span>
                       <div className="relative">
                         <input
+                          id="login-password"
                           type={showPassword ? "text" : "password"}
                           className="h-12 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 pr-12 text-sm text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20"
                           placeholder="Enter your password"
+                          autoComplete="current-password"
                           {...form.register("password")}
+                          aria-invalid={form.formState.errors.password ? "true" : "false"}
+                          aria-describedby={form.formState.errors.password ? "login-password-error" : undefined}
                         />
                         <button
                           type="button"
+                          aria-label={showPassword ? "Hide password" : "Show password"}
                           onClick={() => setShowPassword((current) => !current)}
                           className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 transition hover:text-slate-900"
                         >
                           {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                         </button>
                       </div>
-                      {form.formState.errors.password && <span className="text-sm text-red-600">{form.formState.errors.password.message}</span>}
+                      {form.formState.errors.password && (
+                        <span id="login-password-error" className="text-sm text-red-600">
+                          {form.formState.errors.password.message}
+                        </span>
+                      )}
                     </label>
 
                     <div className="grid gap-4 sm:grid-cols-2">
@@ -265,7 +300,11 @@ export function LoginForm() {
                       </label>
                     </div>
 
-                    {errorMessage && <div className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">{errorMessage}</div>}
+                    {errorMessage && (
+                      <div role="alert" aria-live="assertive" className="rounded-2xl bg-red-50 px-4 py-3 text-sm text-red-700">
+                        {errorMessage}
+                      </div>
+                    )}
 
                     <div className="grid gap-4">
                       <Button type="submit" className="h-12 rounded-2xl bg-slate-950 text-white hover:bg-slate-800">
@@ -290,6 +329,6 @@ export function LoginForm() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
