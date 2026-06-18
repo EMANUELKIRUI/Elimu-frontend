@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import { useAuthStore } from "@/stores/auth-store";
 
@@ -26,9 +26,16 @@ function hasAdminToken() {
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
+  const logout = useAuthStore((state) => state.logout);
   const isLoginPage = pathname === "/admin/login";
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated) || hasAdminToken();
   const showNavigation = isAuthenticated && !isLoginPage;
+
+  const handleLogout = () => {
+    logout();
+    router.push("/admin/login");
+  };
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
@@ -43,17 +50,26 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </div>
 
           {showNavigation ? (
-            <nav className="space-y-2 text-sm font-medium text-slate-700">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href as any}
-                  className="block rounded-2xl px-4 py-3 transition hover:bg-slate-50 hover:text-slate-950"
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
+            <>
+              <nav className="space-y-2 text-sm font-medium text-slate-700">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href as any}
+                    className="block rounded-2xl px-4 py-3 transition hover:bg-slate-50 hover:text-slate-950"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="mt-6 w-full rounded-2xl bg-slate-950 px-4 py-3 text-left text-sm font-semibold text-white transition hover:bg-slate-800"
+              >
+                Log out
+              </button>
+            </>
           ) : (
             <div className="rounded-3xl bg-slate-50 p-6 text-sm text-slate-600 shadow-sm">
               <p className="font-semibold text-slate-950">Admin navigation hidden</p>
