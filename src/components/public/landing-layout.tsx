@@ -28,6 +28,9 @@ export function LandingLayout({ children }: { children: React.ReactNode }) {
             ))}
           </nav>
           <div className="flex flex-wrap items-center gap-2">
+            <Link href={{ pathname: "/admin/login" }}>
+              <Button variant="outline">Admin Login</Button>
+            </Link>
             <Link href={{ pathname: "/login" }}>
               <Button variant="ghost">Login</Button>
             </Link>

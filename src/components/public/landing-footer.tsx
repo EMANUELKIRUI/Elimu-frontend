@@ -16,6 +16,7 @@ const sections = [
     ]
   },
   { title: "Support", links: [
+      { href: "/admin/login", label: "Admin Login" },
       { href: "/login", label: "Login" },
       { href: "/register-school", label: "Register School" },
       { href: "/faq", label: "FAQ" }
