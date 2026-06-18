@@ -20,20 +20,11 @@ export function LoginLayout({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      <main className="flex min-h-[calc(100vh-72px)] items-center">
-        <div className="mx-auto w-full max-w-6xl grid grid-cols-1 gap-8 px-6 py-12 lg:grid-cols-[1.2fr_1fr] lg:items-center">
-          <section className="order-2 lg:order-1 flex items-center justify-center">
-            <div className="w-full rounded-[2rem] bg-slate-950/95 p-10 text-white shadow-2xl sm:p-12 lg:p-14">
-              <h2 className="text-3xl font-extrabold tracking-tight text-white">School login</h2>
-              <p className="mt-4 text-base leading-7 text-slate-300">Sign in to access your school workspace and manage students, staff, attendance, and reports.</p>
-            </div>
-          </section>
-
-          <section className="order-1 flex items-center justify-center lg:order-2">
-            <div className="w-full max-w-2xl rounded-2xl bg-white p-10 shadow-2xl sm:p-12 lg:p-14">
-              {children}
-            </div>
-          </section>
+      <main className="flex min-h-[calc(100vh-72px)] items-center justify-center px-6 py-12">
+        <div className="w-full max-w-xl">
+          <div className="rounded-3xl bg-white shadow-lg">
+            {children}
+          </div>
         </div>
       </main>
 
